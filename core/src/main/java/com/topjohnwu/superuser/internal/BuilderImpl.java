@@ -27,6 +27,7 @@ import androidx.annotation.RestrictTo;
 
 import com.topjohnwu.superuser.NoShellException;
 import com.topjohnwu.superuser.Shell;
+import io.github.pixee.security.SystemCommand;
 
 import java.io.IOException;
 import java.lang.reflect.Constructor;
@@ -109,7 +110,7 @@ public final class BuilderImpl extends Shell.Builder {
     public ShellImpl build(String... commands) {
         try {
             Utils.log(TAG, "exec " + TextUtils.join(" ", commands));
-            Process process = Runtime.getRuntime().exec(commands);
+            Process process = SystemCommand.runCommand(Runtime.getRuntime(), commands);
             return build(process);
         } catch (IOException e) {
             Utils.ex(e);

@@ -27,6 +27,7 @@ import android.util.Log;
 import androidx.annotation.RestrictTo;
 
 import com.topjohnwu.superuser.Shell;
+import io.github.pixee.security.SystemCommand;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -139,7 +140,7 @@ public final class Utils {
             return true;
         }
         try {
-            Runtime.getRuntime().exec("su --version");
+            SystemCommand.runCommand(Runtime.getRuntime(), "su --version");
             // Even if the execution worked, we don't actually know whether the app has
             // been granted root access. As a heuristic, let's return true here,
             // but do NOT set the value as a confirmed state.
